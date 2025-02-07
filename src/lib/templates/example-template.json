@@ -1,0 +1,48 @@
+{
+  "metadata": {
+    "name": "Lead Generation Workflow",
+    "description": "Automated workflow for processing and qualifying new leads",
+    "version": "1.0.0",
+    "author": "Lovable AI",
+    "tags": ["sales", "automation", "leads"]
+  },
+  "nodes": [
+    {
+      "id": "trigger-1",
+      "type": "trigger",
+      "label": "New Lead Created",
+      "position": { "x": 250, "y": 0 },
+      "data": {
+        "triggerType": "lead_created"
+      }
+    },
+    {
+      "id": "ai-1",
+      "type": "ai",
+      "label": "Score Lead Intent",
+      "position": { "x": 250, "y": 100 },
+      "data": {
+        "type": "lead-scoring"
+      }
+    },
+    {
+      "id": "condition-1",
+      "type": "condition",
+      "label": "High Intent Lead?",
+      "position": { "x": 250, "y": 200 }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1-2",
+      "source": "trigger-1",
+      "target": "ai-1",
+      "animated": true
+    },
+    {
+      "id": "e2-3",
+      "source": "ai-1",
+      "target": "condition-1"
+    }
+  ]
+}
