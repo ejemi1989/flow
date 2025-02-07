@@ -3,7 +3,6 @@
 import { PLANS } from "@/constants";
 import { PLAN } from "@/constants/plans";
 import { cn } from "@/lib";
-import NumberFlow from "@number-flow/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckIcon } from "lucide-react";
 import { useState } from "react";
@@ -78,18 +77,7 @@ const Plan = ({ plan, billPlan }: { plan: PLAN, billPlan: Plan }) => {
                     {plan.title}
                 </h2>
                 <h3 className="mt-3 text-3xl font-medium md:text-5xl">
-                    <NumberFlow
-                        value={billPlan === "monthly" ? plan.monthlyPrice : plan.annuallyPrice}
-                        suffix={billPlan === "monthly" ? "/mo" : "/yr"}
-                        format={{
-                            currency: "USD",
-                            style: "currency",
-                            currencySign: "standard",
-                            minimumFractionDigits: 0,
-                            maximumFractionDigits: 0,
-                            currencyDisplay: "narrowSymbol"
-                        }}
-                    />
+                    {billPlan === "monthly" ? plan.monthlyPrice : plan.annuallyPrice}
                 </h3>
                 <p className="text-sm md:text-base text-muted-foreground mt-2">
                     {plan.desc}

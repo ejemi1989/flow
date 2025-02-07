@@ -3,8 +3,9 @@
 import { Card } from "@/components/backend/ui/card";
 import { GitBranch, Workflow, FileText } from "lucide-react";
 import Link from "next/link";
+import type { FC } from 'react';
 
-const Started = () => {
+const Started: FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8 flex items-center gap-2">
@@ -65,10 +66,10 @@ const Started = () => {
             </p>
             <ol className="list-decimal list-inside space-y-2 text-gray-600">
               <li>Navigate to the Workflows section in the dashboard</li>
-              <li>Click on "Create New Workflow"</li>
+              <li>Click on &quot;Create New Workflow&quot;</li>
               <li>Choose a template or start from scratch</li>
               <li>Add and connect nodes to build your automation</li>
-              <li>Configure each node's settings</li>
+              <li>Configure each node&apos;s settings</li>
               <li>Test and activate your workflow</li>
             </ol>
           </div>

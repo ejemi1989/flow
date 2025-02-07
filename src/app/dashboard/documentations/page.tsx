@@ -2,7 +2,7 @@
 
 import { ScrollArea } from "@/components/backend/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/backend/ui/tabs";
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/backend/ui/card";
 import { GitBranch, Book, FileText, Workflow } from "lucide-react";
 import Link from "next/link";
 

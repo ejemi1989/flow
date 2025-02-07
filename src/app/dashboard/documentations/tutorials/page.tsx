@@ -2,8 +2,9 @@
 
 import { Card } from "@/components/backend/ui/card";
 import Link from "next/link";
+import type { FC } from 'react';
 
-const Tutorials = () => {
+const Tutorials: FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8 flex items-center gap-2">

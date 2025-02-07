@@ -1,11 +1,12 @@
 "use client";
 
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Card } from "@/components/ui/card";
+import { ScrollArea } from "@/components/backend/ui/scroll-area";
+import { Card } from "@/components/backend/ui/card";
 import Link from "next/link";
 import { nodeCategories } from "@/config/nodeCategories";
+import type { FC } from 'react';
 
-const Nodes = () => {
+const Nodes: FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8 flex items-center gap-2">
