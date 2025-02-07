@@ -86,7 +86,7 @@ const ChatInterface = ({
               </div>
             </div>
           ))}
-          <div ref={messagesEndRef} />
+          <div ref={messagesEndRef as React.RefObject<HTMLDivElement>} />
         </div>
 
         <div className="flex flex-col gap-2">
