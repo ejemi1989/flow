@@ -187,10 +187,10 @@ importers:
         specifier: ^20.0.0
         version: 20.17.17
       '@types/react':
-        specifier: ^18.2.0
+        specifier: ^18.3.18
         version: 18.3.18
       '@types/react-dom':
-        specifier: ^18.2.0
+        specifier: ^18.3.5
         version: 18.3.5(@types/react@18.3.18)
       autoprefixer:
         specifier: ^10.0.1

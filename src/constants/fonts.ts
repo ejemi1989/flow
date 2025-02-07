@@ -42,3 +42,5 @@ export const subheading = Instrument_Serif({
     weight: ["400"],
     variable: "--font-subheading",
 });
+
+export const INSTRUMENT_SERIF = "'Instrument Serif', serif";
