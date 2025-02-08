@@ -3,6 +3,7 @@ import { MessageWithMetadata } from '@/types/chat';
 import ChatInput from './ChatInput';
 import ChatMessageList from './ChatMessageList';
 import { useNavigate } from "react-router-dom";
+import { useFlowHandlers } from '@/hooks/useFlowHandlers';
 
 interface ChatInterfaceProps {
   messages: MessageWithMetadata[];
@@ -50,6 +51,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     const file = event.target.files?.[0] || null;
     handleFileUpload(file);
   };
+
+  const { onDragOver, onDrop, onDragStart } = useFlowHandlers(nodes, setNodes);
 
   return (
     <div className="flex flex-col h-full font-sans">

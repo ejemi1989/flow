@@ -104,7 +104,7 @@ const Flow = ({ initialNodes, initialEdges, workflowId }: FlowBuilderProps) => {
     }
   }, []);
 
-  const { onDragOver, onDrop, onDragStart } = useFlowHandlers(nodes, setNodes, setEdges);
+  const { onDragOver, onDrop, onDragStart } = useFlowHandlers(nodes, setNodes);
 
   const onMoveEnd = useCallback<OnMove>((_, viewport) => {
     try {
