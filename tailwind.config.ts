@@ -3,10 +3,12 @@ import type { Config } from "tailwindcss";
 export default {
   darkMode: ["class"],
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
+  prefix: "",
   theme: {
     extend: {
       colors: {
@@ -131,9 +133,9 @@ export default {
         "1/8": "12.5%",
       },
       fontFamily: {
-        heading: ["Instrument Serif", "serif"],
-        subheading: ["Instrument Serif", "serif"],
-        base: ["Instrument Serif", "serif"],
+        heading: ["Inter", "sans-serif"],
+        subheading: ["Inter ", "sans-serif"],
+        base: ["Inter", "sans-serif"],
       },
     },
   },
