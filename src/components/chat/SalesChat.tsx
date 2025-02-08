@@ -28,7 +28,11 @@ const SalesChat = ({ fullPage = false }: SalesChatProps) => {
     clearHistory: chatProps?.clearHistory || (() => {}),
     handleFileUpload: chatProps?.handleFileUpload || (() => {}),
     deleteMessage: chatProps?.deleteMessage || (() => {}),
-    copyMessage: chatProps?.copyMessage || (() => {})
+    copyMessage: chatProps?.copyMessage || (() => {}),
+    onSendMessage: chatProps?.handleSend || (() => {}),
+    onDelete: chatProps?.deleteMessage || (() => {}),
+    onCopy: chatProps?.copyMessage || (() => {}),
+    onReaction: chatProps?.handleReaction || (() => {})
   };
 
   return (

@@ -5,9 +5,9 @@ import ChatMessageList from './ChatMessageList';
 
 interface ChatInterfaceProps {
   messages: MessageWithMetadata[];
-  onSendMessage: () => void;
+  onSendMessage: (message: string) => void;
   isLoading: boolean;
-  handleFileUpload: () => void;
+  handleFileUpload: (file: File | null) => void;
   input: string;
   setInput: (value: string) => void;
   formatting: {
@@ -15,7 +15,7 @@ interface ChatInterfaceProps {
     italic: boolean;
     underline: boolean;
   };
-  setFormatting: (value: any) => void;
+  setFormatting: (value: { bold: boolean; italic: boolean; underline: boolean }) => void;
   fileInputRef: React.RefObject<HTMLInputElement>;
   messagesEndRef: React.RefObject<HTMLDivElement>;
   onDelete: (id: string) => void;
@@ -36,11 +36,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
   messagesEndRef,
   onDelete,
   onCopy,
-  onReaction
+  onReaction,
 }) => {
   const handleSend = () => {
     if (input.trim()) {
-      onSendMessage();
+      onSendMessage(input);
+      setInput(''); // Clear input after sending
     }
   };
 
@@ -56,7 +57,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
           onReaction={onReaction}
         />
       </div>
-      
+
       <div className="p-4 border-t">
         <div className="flex items-center gap-2">
           <ChatInput

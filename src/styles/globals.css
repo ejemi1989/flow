@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;700&display=swap');
 
 body {
-  font-family: 'Instrument Serif', serif;
+  font-family: 'Instrument Serif', serif, 'Times New Roman', Times, serif;
 }
 
 @layer base {
