@@ -1,6 +1,5 @@
 import ChatHeader from "./ChatHeader";
-import ChatMessageList from "./ChatMessageList";
-import ChatInput from "./ChatInput";
+import ChatInterface from "./ChatInterface";
 import { MessageWithMetadata } from "@/types/chat";
 import { RefObject } from "react";
 
@@ -55,27 +54,21 @@ const ChatContent = ({
 
       <div className="flex-1 flex flex-col">
         <div className="flex-1 flex flex-col px-4 overflow-hidden">
-          <ChatMessageList
+          <ChatInterface
             messages={messages}
+            onSendMessage={handleSend}
             isLoading={isLoading}
+            handleFileUpload={handleFileUpload}
+            input={input}
+            setInput={setInput}
+            formatting={formatting}
+            setFormatting={setFormatting}
+            fileInputRef={fileInputRef}
             messagesEndRef={messagesEndRef}
             onDelete={deleteMessage}
             onCopy={copyMessage}
             onReaction={onReaction}
           />
-
-          <div className="py-4">
-            <ChatInput
-              input={input}
-              setInput={setInput}
-              formatting={formatting}
-              setFormatting={setFormatting}
-              handleSend={handleSend}
-              isLoading={isLoading}
-              fileInputRef={fileInputRef}
-              handleFileUpload={handleFileUpload}
-            />
-          </div>
         </div>
       </div>
     </div>

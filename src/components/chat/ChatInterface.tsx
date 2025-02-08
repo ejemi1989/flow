@@ -1,75 +1,78 @@
-import React, { useRef } from 'react';
-import { Message } from '@/types/chat';
+import React from 'react';
+import { MessageWithMetadata } from '@/types/chat';
 import ChatInput from './ChatInput';
 import ChatMessageList from './ChatMessageList';
+
 interface ChatInterfaceProps {
-  messages: Message[];
-  onSendMessage: (message: string) => void;
+  messages: MessageWithMetadata[];
+  onSendMessage: () => void;
   isLoading: boolean;
   handleFileUpload: () => void;
-  formatting: any;
-  setFormatting: React.Dispatch<React.SetStateAction<any>>;
+  input: string;
+  setInput: (value: string) => void;
+  formatting: {
+    bold: boolean;
+    italic: boolean;
+    underline: boolean;
+  };
+  setFormatting: (value: any) => void;
+  fileInputRef: React.RefObject<HTMLInputElement>;
   messagesEndRef: React.RefObject<HTMLDivElement>;
-  deleteMessage: (messageId: string) => void;
-  copyMessage: (messageId: string) => void;
-  handleReaction: (messageId: string, reaction: string) => void;
+  onDelete: (id: string) => void;
+  onCopy: (content: string) => void;
+  onReaction: (id: string, reaction: string) => void;
 }
+
 const ChatInterface: React.FC<ChatInterfaceProps> = ({
   messages,
   onSendMessage,
   isLoading,
   handleFileUpload,
+  input,
+  setInput,
   formatting,
   setFormatting,
+  fileInputRef,
   messagesEndRef,
-  deleteMessage,
-  copyMessage,
-  handleReaction
+  onDelete,
+  onCopy,
+  onReaction
 }) => {
-  // Correctly type the ref to be strictly HTMLInputElement
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [input, setInput] = React.useState('');
   const handleSend = () => {
     if (input.trim()) {
-      onSendMessage(input);
-      setInput('');
+      onSendMessage();
     }
   };
+
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full font-sans">
       <div className="flex-1 overflow-y-auto">
-        <ChatMessageList
+        <ChatMessageList 
           messages={messages}
           isLoading={isLoading}
           messagesEndRef={messagesEndRef}
-          onDelete={deleteMessage}
-          onCopy={copyMessage}
-          onReaction={handleReaction}
+          onDelete={onDelete}
+          onCopy={onCopy}
+          onReaction={onReaction}
         />
       </div>
       
       <div className="p-4 border-t">
         <div className="flex items-center gap-2">
-          <input
-            type="file"
-            ref={fileInputRef}
-            className="hidden"
-            onChange={handleFileUpload}
-          />
-          
           <ChatInput
             input={input}
             setInput={setInput}
+            formatting={formatting}
+            setFormatting={setFormatting}
             handleSend={handleSend}
             isLoading={isLoading}
             fileInputRef={fileInputRef}
             handleFileUpload={handleFileUpload}
-            formatting={formatting}
-            setFormatting={setFormatting}
           />
         </div>
       </div>
     </div>
   );
 };
+
 export default ChatInterface;
