@@ -15,16 +15,9 @@ const WorkflowGrid = () => {
     queryKey: ["workflows"],
     queryFn: async () => {
       console.log("Fetching workflows...");
-      const { data: user } = await supabase.auth.getUser();
-      
-      if (!user.user) {
-        throw new Error("User not authenticated");
-      }
-
       const { data, error } = await supabase
         .from("workflows")
         .select("*")
-        .eq('user_id', user.user.id)
         .order("created_at", { ascending: false });
 
       if (error) {
@@ -93,7 +86,7 @@ const WorkflowGrid = () => {
             key={workflow.id}
             id={workflow.id}
             name={workflow.name}
-            description={workflow.description}
+            description={workflow.description || undefined}
             createdAt={workflow.created_at}
             onDelete={(id) => deleteWorkflow.mutate(id)}
           />
