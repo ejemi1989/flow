@@ -4,13 +4,13 @@ import { toast } from "sonner";
 
 interface Lead {
   id: string;
-  user_id: string;
   contact_id?: string;
   status: string;
   source?: string;
   notes?: string;
   created_at: string;
   updated_at: string;
+  user_id: string;
   contacts?: any;
 }
 
@@ -46,10 +46,12 @@ export function useLeads() {
   const createLead = useMutation({
     mutationFn: async (input: CreateLeadInput) => {
       console.log("Creating lead:", input);
-      const user = await supabase.auth.getUser();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("User not authenticated");
+
       const { data, error } = await supabase
         .from("leads")
-        .insert([{ ...input, user_id: user.data.user?.id }])
+        .insert({ ...input, user_id: user.id })
         .select()
         .single();
 
