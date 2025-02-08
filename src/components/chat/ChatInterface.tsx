@@ -45,6 +45,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     }
   };
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] || null;
+    handleFileUpload(file);
+  };
+
   return (
     <div className="flex flex-col h-full font-sans">
       <div className="flex-1 overflow-y-auto">
@@ -68,7 +73,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
             handleSend={handleSend}
             isLoading={isLoading}
             fileInputRef={fileInputRef}
-            handleFileUpload={handleFileUpload}
+            handleFileUpload={handleFileChange}
           />
         </div>
       </div>
