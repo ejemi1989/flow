@@ -65,6 +65,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
 
       <div className="p-4 border-t">
         <div className="flex items-center gap-2">
+          <input
+            type="file"
+            ref={fileInputRef}
+            className="hidden"
+            onChange={handleFileChange}
+          />
           <ChatInput
             input={input}
             setInput={setInput}
@@ -73,7 +79,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
             handleSend={handleSend}
             isLoading={isLoading}
             fileInputRef={fileInputRef}
-            handleFileUpload={handleFileChange}
+            handleFileUpload={() => {}}
           />
         </div>
       </div>
