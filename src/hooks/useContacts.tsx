@@ -4,15 +4,15 @@ import { toast } from "sonner";
 
 interface Contact {
   id: string;
-  user_id: string;
   first_name: string;
   last_name?: string;
   email?: string;
   phone?: string;
   company?: string;
-  status: "active" | "lead" | "customer";
+  status: 'active' | 'lead' | 'customer';
   created_at: string;
   updated_at: string;
+  user_id: string;
 }
 
 interface CreateContactInput {
@@ -21,7 +21,7 @@ interface CreateContactInput {
   email?: string;
   phone?: string;
   company?: string;
-  status: "active" | "lead" | "customer";
+  status: 'active' | 'lead' | 'customer';
 }
 
 interface UpdateContactInput extends Partial<CreateContactInput> {
@@ -53,10 +53,12 @@ export function useContacts() {
   const createContact = useMutation({
     mutationFn: async (input: CreateContactInput) => {
       console.log("Creating contact:", input);
-      const user = await supabase.auth.getUser();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("User not authenticated");
+
       const { data, error } = await supabase
         .from("contacts")
-        .insert([{ ...input, user_id: user.data.user?.id }])
+        .insert({ ...input, user_id: user.id })
         .select()
         .single();
 
@@ -70,16 +72,21 @@ export function useContacts() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["contacts"] });
+      toast.success("Contact created successfully");
     },
   });
 
   const updateContact = useMutation({
     mutationFn: async ({ id, ...input }: UpdateContactInput) => {
       console.log("Updating contact:", id, input);
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("User not authenticated");
+
       const { data, error } = await supabase
         .from("contacts")
         .update(input)
         .eq("id", id)
+        .eq("user_id", user.id)
         .select()
         .single();
 
@@ -93,16 +100,21 @@ export function useContacts() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["contacts"] });
+      toast.success("Contact updated successfully");
     },
   });
 
   const deleteContact = useMutation({
     mutationFn: async (id: string) => {
       console.log("Deleting contact:", id);
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("User not authenticated");
+
       const { error } = await supabase
         .from("contacts")
         .delete()
-        .eq("id", id);
+        .eq("id", id)
+        .eq("user_id", user.id);
 
       if (error) {
         console.error("Error deleting contact:", error);
@@ -112,6 +124,7 @@ export function useContacts() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["contacts"] });
+      toast.success("Contact deleted successfully");
     },
   });
 
