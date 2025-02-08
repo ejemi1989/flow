@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import {
   ReactFlow,
   MiniMap,
@@ -7,7 +7,9 @@ import {
   Node,
   Edge,
   useNodesState,
-  useEdgesState
+  useEdgesState,
+  Connection,
+  BackgroundVariant
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
@@ -25,7 +27,7 @@ const WorkflowsClient = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect = useCallback(
-    (params) => setEdges((eds) => [...eds, { ...params, id: `edge-${eds.length + 1}` }]),
+    (params: Connection) => setEdges((eds) => [...eds, { ...params, id: `edge-${eds.length + 1}` }]),
     [setEdges]
   );
 
@@ -41,7 +43,7 @@ const WorkflowsClient = () => {
       >
         <MiniMap />
         <Controls />
-        <Background type="xygrid" variant="dots" />
+        <Background variant={BackgroundVariant.Dots} />
       </ReactFlow>
     </div>
   );
