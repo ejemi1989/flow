@@ -2,6 +2,7 @@ import React from 'react';
 import { MessageWithMetadata } from '@/types/chat';
 import ChatInput from './ChatInput';
 import ChatMessageList from './ChatMessageList';
+import { useNavigate } from "react-router-dom";
 
 interface ChatInterfaceProps {
   messages: MessageWithMetadata[];
